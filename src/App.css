@@ -1,5 +1,11 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts.css);
+@import url(./layouts/blocks/git-repo-tile/git-repo-tile.css);
+@import url(./layouts/blocks/search-form/search-form.css);
+@import url(./layouts/blocks/repo-list/repo-list.css);
+
 .App {
-  text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {

@@ -1,10 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import GitRepoTile from './layouts/components/GitRepoTile.js';
+import SearchForm from './layouts/components/SearchForm.js';
 
 function App() {
   return (
-    <div className="App">
+    <>
+    <SearchForm />
+      <div className="repo-list">
+        
+        <GitRepoTile />
+        <GitRepoTile />
+        <GitRepoTile />
+        
+      </div>
+    </>
+
+    /*<div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,7 +32,7 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </div>*/
   );
 }
 
