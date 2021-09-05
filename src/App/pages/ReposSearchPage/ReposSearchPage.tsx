@@ -14,12 +14,14 @@ function ReposSearchPage() {
   const [inputValue, setInputValue] = React.useState("");
   const [repoList, setRepoList] = React.useState<Array<any>>();
   const [isLoading, setIsLoading] = React.useState(false);
+  React.useEffect(() => {
+    renderReply(repoList);
+  }, [repoList]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
 
-  const handleReply = (reply: Array<any>) => {
-    setRepoList(reply);
+  const renderReply = (reply: Array<any> | undefined) => {
     if (repoList) {
       ReactDOM.render(
         <>
@@ -30,7 +32,7 @@ function ReposSearchPage() {
                 title={repo.name}
                 organization={repo.owner.login}
                 starCounter={repo.stargazers_count}
-                updated={repo.udated_at}
+                updated={repo.updated_at}
               />
             );
           })}
@@ -43,19 +45,17 @@ function ReposSearchPage() {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const gitHubStore = new GitHubStore();
-    const EXAMPLE_ORGANIZATION = inputValue;
     setIsLoading(true);
     gitHubStore
       .getOrganizationReposList({
-        organizationName: EXAMPLE_ORGANIZATION,
+        organizationName: inputValue,
       })
       .then((result: ApiResponse<RepoItem[], any>) => {
-        // eslint-disable-next-line no-console
-        console.log(result.data); // в консоли появится список репозиториев в ktsstudio
-        handleReply(result.data);
-        setIsLoading(false);
-        // eslint-disable-next-line no-console
-      });
+        setRepoList(result.data);
+        //handleReply(result.data);
+        //setIsLoading(false);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -66,16 +66,13 @@ function ReposSearchPage() {
           onChange={handleChange}
           value={inputValue}
         />
-        <Button children={<SearchIcon />} onClick={handleClick} />
-      </form>
-      <div className="repo-list">
-        <RepoTile
-          title={"kts-summer"}
-          organization={"kts"}
-          starCounter={123}
-          updated={"Вчера"}
+        <Button
+          children={<SearchIcon />}
+          onClick={handleClick}
+          disabled={isLoading}
         />
-      </div>
+      </form>
+      <div className="repo-list"></div>
     </>
   );
 }
