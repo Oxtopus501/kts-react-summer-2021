@@ -23,6 +23,15 @@ class GitHubStore implements IGitHubStore {
       endpoint: `/orgs/${params.organizationName}/repos`,
     });
   }
+
+  async getRepoById(id: string): Promise<ApiResponse<RepoItem, any>> {
+    return await this.apiStore.request({
+      method: HTTPMethod.GET,
+      data: {},
+      headers: {},
+      endpoint: `/repositories/${id}`,
+    });
+  }
 }
 
 export default GitHubStore;

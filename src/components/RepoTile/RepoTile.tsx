@@ -2,8 +2,6 @@ import React from "react";
 
 import StarIcon from "@components/StarIcon";
 
-import star from "../../images/star.svg";
-
 import "./repo-tile.css";
 
 export type RepoTileProps = {
@@ -12,6 +10,7 @@ export type RepoTileProps = {
   organization: String;
   starCounter: Number;
   updated: String;
+  avatar: String;
 };
 
 const RepoTile: React.FC<RepoTileProps> = ({
@@ -19,10 +18,18 @@ const RepoTile: React.FC<RepoTileProps> = ({
   organization,
   starCounter,
   updated,
+  avatar,
 }) => {
   return (
     <div className="repo-tile">
-      <div className="repo-tile__image"></div>
+      <div
+        className="repo-tile__image"
+        style={{
+          backgroundImage: `url(${avatar})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      ></div>
       <div className="repo-tile__text-container">
         <h2 className="repo-tile__title">{title}</h2>
         <p className="repo-tile__org-link">{organization}</p>
