@@ -1,18 +1,72 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 
-import Repo from "@components/Repo";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import "./App.css";
+import { ApiResponse } from "../shared/store/ApiStore/types";
+import GitHubStore from "../store/GitHubStore/";
+import { RepoItem } from "../store/GitHubStore/types";
+import Repo from "./pages/Repo/";
 import ReposSearchPage from "./pages/ReposSearchPage/";
 
+type ReposContextT = {
+  repoList?: RepoItem[];
+  isLoading: boolean;
+  load: () => void;
+  inputValue: string;
+  changeValue(arg: string): void;
+};
+
+export const ReposContext = createContext<ReposContextT>({
+  repoList: [],
+  isLoading: false,
+  load: () => {},
+  inputValue: "",
+  changeValue: () => {},
+});
+
+const Provider = ReposContext.Provider;
+
+export const useReposContext = () => useContext(ReposContext);
+
 function App() {
+  const [repoList, setRepoList] = React.useState<Array<RepoItem>>();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState<string>("");
+
+  const changeValue = (value: string) => {
+    setInputValue(value);
+  };
+
+  const load = () => {
+    const gitHubStore = new GitHubStore();
+    setIsLoading(true);
+    gitHubStore
+      .getOrganizationReposList({
+        organizationName: inputValue,
+      })
+      .then((result: ApiResponse<RepoItem[], any>) => {
+        if (result.success) {
+          setRepoList(result.data);
+          // eslint-disable-next-line no-console
+          //console.log(result.data);
+        }
+        //handleReply(result.data);
+        //setIsLoading(false);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/repos" component={ReposSearchPage} />
-        <Route path="/repos/:id" component={Repo} />
-        <Redirect to="/repos" />
+        <Provider
+          value={{ repoList, isLoading, load, inputValue, changeValue }}
+        >
+          <Route exact path="/repos" component={ReposSearchPage} />
+          <Route path="/repos/:id" component={Repo} />
+          <Redirect to="/repos" />
+        </Provider>
       </Switch>
     </BrowserRouter>
   );

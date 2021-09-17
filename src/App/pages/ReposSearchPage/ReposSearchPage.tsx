@@ -1,4 +1,4 @@
-import React, { ReactType } from "react";
+import React, { ReactType, useContext } from "react";
 
 import Button from "@components/Button";
 import Input from "@components/Input";
@@ -9,27 +9,29 @@ import { Link } from "react-router-dom";
 import { RepoItem } from "src/store/GitHubStore/types";
 
 import { ApiResponse } from "../../../shared/store/ApiStore/types";
-import GitHubStore from "../../../store/GitHubStore";
+import { useReposContext } from "../../App";
 
-type ReposContext = { list?: RepoItem[]; isLoading: boolean; load: () => void };
+//import GitHubStore from "../../../store/GitHubStore";
+
+//type ReposContext = { list?: RepoItem[]; isLoading: boolean; load: () => void };
 
 function ReposSearchPage() {
-  const [inputValue, setInputValue] = React.useState<string>("");
-  const [repoList, setRepoList] = React.useState<Array<RepoItem>>();
-  const [isLoading, setIsLoading] = React.useState(false);
+  //const [repoList, setRepoList] = React.useState<Array<RepoItem>>();
+  //const [isLoading, setIsLoading] = React.useState(false);
   /*React.useEffect(() => {
     renderReply(repoList);
   }, [repoList]);*/
-  const ReposContext = React.createContext<ReposContext>({
+  /*const ReposContext = React.createContext<ReposContext>({
     list: repoList,
     isLoading: false,
     load: () => {},
   });
-
   const Provider = ReposContext.Provider;
+  */
+  const reposContext = useReposContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setInputValue(e.target.value);
+    reposContext.changeValue(e.target.value);
 
   /*const renderReply = (reply: Array<any> | undefined) => {
     if (repoList) {
@@ -48,9 +50,7 @@ function ReposSearchPage() {
       </>;
     }
   };*/
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  /*const load = () => {
     const gitHubStore = new GitHubStore();
     setIsLoading(true);
     gitHubStore
@@ -67,6 +67,27 @@ function ReposSearchPage() {
         //setIsLoading(false);
       })
       .finally(() => setIsLoading(false));
+  };*/
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    reposContext.load();
+    /*const gitHubStore = new GitHubStore();
+    setIsLoading(true);
+    gitHubStore
+      .getOrganizationReposList({
+        organizationName: inputValue,
+      })
+      .then((result: ApiResponse<RepoItem[], any>) => {
+        if (result.success) {
+          setRepoList(result.data);
+          // eslint-disable-next-line no-console
+          //console.log(result.data);
+        }
+        //handleReply(result.data);
+        //setIsLoading(false);
+      })
+      .finally(() => setIsLoading(false));*/
   };
 
   return (
@@ -75,17 +96,17 @@ function ReposSearchPage() {
         <Input
           placeholder={"Введите название организации"}
           onChange={handleChange}
-          value={inputValue}
+          value={reposContext.inputValue}
         />
         <Button
           children={<SearchIcon />}
           onClick={handleClick}
-          disabled={isLoading}
+          disabled={reposContext.isLoading}
         />
       </form>
       <div className="repo-list">
-        {repoList
-          ? repoList.map((repo) => {
+        {reposContext.repoList
+          ? reposContext.repoList.map((repo) => {
               return (
                 <Link
                   to={`/repos/${repo.id}`}
