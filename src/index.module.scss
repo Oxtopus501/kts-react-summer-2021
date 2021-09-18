@@ -1,7 +1,5 @@
-@import url(../src/vendor/normalize.css);
-@import url(../src/vendor/fonts.css);
-@import url(../src/layouts/blocks/search-form/search-form.css);
-@import url(../src/layouts/blocks/repo-list/repo-list.css);
+@import "../src/vendor/normalize.css";
+@import "../src/vendor/fonts.css";
 
 body {
   margin: 0;

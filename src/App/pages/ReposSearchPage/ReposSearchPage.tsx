@@ -8,6 +8,8 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { RepoItem } from "src/store/GitHubStore/types";
 
+import stylesRepoList from "../../../layouts/blocks/repo-list/repo-list.module.scss";
+import stylesSearchForm from "../../../layouts/blocks/search-form/search-form.module.scss";
 import { ApiResponse } from "../../../shared/store/ApiStore/types";
 import { useReposContext } from "../../App";
 
@@ -92,7 +94,7 @@ function ReposSearchPage() {
 
   return (
     <>
-      <form className="search-form">
+      <form className={`${stylesSearchForm["search-form"]}`}>
         <Input
           placeholder={"Введите название организации"}
           onChange={handleChange}
@@ -104,7 +106,7 @@ function ReposSearchPage() {
           disabled={reposContext.isLoading}
         />
       </form>
-      <div className="repo-list">
+      <div className={`${stylesRepoList["repo-list"]}`}>
         {reposContext.repoList
           ? reposContext.repoList.map((repo) => {
               return (

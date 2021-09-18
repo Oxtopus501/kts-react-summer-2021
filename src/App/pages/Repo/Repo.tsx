@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Repo.css";
+import "./Repo.scss";
 
 import StarIcon from "@components/StarIcon";
 import { useParams } from "react-router-dom";
@@ -27,8 +27,6 @@ const Repo: React.FC = () => {
   const gitHubStore = new GitHubStore();
   gitHubStore.getRepoById(id).then((result: ApiResponse<RepoItem, any>) => {
     if (result.success) {
-      // eslint-disable-next-line no-console
-      console.log(result.data);
       setName(result.data.name);
       setStarCounter(result.data.stargazers_count);
       setOwner(result.data.owner.login);

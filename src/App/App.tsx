@@ -2,10 +2,10 @@ import React, { createContext, useContext } from "react";
 
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
-import "./App.css";
 import { ApiResponse } from "../shared/store/ApiStore/types";
 import GitHubStore from "../store/GitHubStore/";
 import { RepoItem } from "../store/GitHubStore/types";
+import style from "./App.module.scss";
 import Repo from "./pages/Repo/";
 import ReposSearchPage from "./pages/ReposSearchPage/";
 
@@ -30,7 +30,7 @@ const Provider = ReposContext.Provider;
 export const useReposContext = () => useContext(ReposContext);
 
 function App() {
-  const [repoList, setRepoList] = React.useState<Array<RepoItem>>();
+  const [repoList, setRepoList] = React.useState<RepoItem[]>();
   const [isLoading, setIsLoading] = React.useState(false);
   const [inputValue, setInputValue] = React.useState<string>("");
 
@@ -48,11 +48,7 @@ function App() {
       .then((result: ApiResponse<RepoItem[], any>) => {
         if (result.success) {
           setRepoList(result.data);
-          // eslint-disable-next-line no-console
-          //console.log(result.data);
         }
-        //handleReply(result.data);
-        //setIsLoading(false);
       })
       .finally(() => setIsLoading(false));
   };
