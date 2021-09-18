@@ -1,0 +1,25 @@
+.search-form__input {
+    height: 50px;
+    width: 295px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    border: 1px solid #D9D9D9;
+    font-size: 14px;
+    padding: 0 12px 0;
+    vertical-align: middle;
+}
+
+.search-form__input::placeholder {
+    font-size: 14px;
+    color: #7E7E7E
+}
+
+.search-form__input:focus {
+    outline: none;
+    border: 1px solid #FF5555;
+}
+
+.search-form__input:disabled {
+    border: 1px solid #D9D9D9;
+}
+

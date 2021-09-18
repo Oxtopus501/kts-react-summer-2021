@@ -1,0 +1,7 @@
+.git-repo-tile__image {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background: #4682B4;
+    margin: 12px;
+}

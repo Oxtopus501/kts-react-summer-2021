@@ -1,0 +1,20 @@
+@import url(./__image/git-repo-tile__image.css);
+@import url(./__text-container/git-repo-tile__text-container.css);
+@import url(./__title/git-repo-tile__title.css);
+@import url(./__org-link/git-repo-tile__org-link.css);
+@import url(./__repo-info/git-repo-tile__repo-info.css);
+@import url(./__star-icon/git-repo-tile__star-icon.css);
+@import url(./__star-counter/git-repo-tile__star-counter.css);
+@import url(./__update-info/git-repo-tile__update-info.css);
+
+
+.git-repo-tile {
+    background-color: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius:  6px;
+    cursor: pointer;
+    display: flex;
+    font-family: 'Roboto', Helvetica, sans-serif;
+    height: 104px;
+    width: 357px;
+}

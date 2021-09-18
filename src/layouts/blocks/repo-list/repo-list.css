@@ -1,0 +1,5 @@
+.repo-list {
+    padding: 20px;
+    display: grid;
+    grid-row-gap: 16px;
+}

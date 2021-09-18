@@ -1,0 +1,17 @@
+.search-form__button {
+    height: 50px;
+    width: 50px;
+    border-radius: 6px;
+    background-color: #FF5555;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.search-form__button:hover {
+    opacity: .8;
+}
+
+.search-form__button:disabled {
+    background-color: #D9D9D9;
+}
