@@ -30,9 +30,11 @@ function ReposSearchPage() {
   };
 
   React.useEffect(() => {
-    reposListStore.getOrganizationReposList({
-      organizationName: reposContext.inputValue,
-    });
+    if (reposContext.inputValue !== "") {
+      reposListStore.getOrganizationReposList({
+        organizationName: reposContext.inputValue,
+      });
+    }
   }, []);
 
   return (
