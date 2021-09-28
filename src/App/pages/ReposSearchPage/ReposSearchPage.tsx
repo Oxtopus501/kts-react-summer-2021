@@ -28,6 +28,12 @@ function ReposSearchPage() {
     });
   };
 
+  React.useEffect(() => {
+    reposListStore.getOrganizationReposList({
+      organizationName: reposContext.inputValue,
+    });
+  }, []);
+
   return (
     <>
       <form className={`${stylesSearchForm["search-form"]}`}>

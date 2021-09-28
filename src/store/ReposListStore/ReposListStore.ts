@@ -25,8 +25,6 @@ import { GetOrganizationReposListParams, IReposListStore } from "./types";
 
 type PrivateFields = "_list" | "_meta";
 
-const BASE_URL = "https://api.github.com";
-
 export default class ReposListStore implements IReposListStore, ILocalStore {
   private readonly _apiStore = rootStore.apiStore;
 
