@@ -4,6 +4,7 @@ import Button from "@components/Button";
 import Input from "@components/Input";
 import RepoTile from "@components/RepoTile/RepoTile";
 import SearchIcon from "@components/SearchIcon";
+import { Meta } from "@utils/meta";
 import { observer, useLocalStore } from "mobx-react-lite";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
@@ -45,7 +46,7 @@ function ReposSearchPage() {
         <Button
           children={<SearchIcon />}
           onClick={handleClick}
-          disabled={reposContext.isLoading}
+          disabled={reposListStore.meta === Meta.loading}
         />
       </form>
       <div className={`${stylesRepoList["repo-list"]}`}>
