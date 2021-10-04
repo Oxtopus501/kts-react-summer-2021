@@ -6,12 +6,12 @@ import RepoTile from "@components/RepoTile/RepoTile";
 import SearchIcon from "@components/SearchIcon";
 import stylesRepoList from "@layouts/blocks/repo-list/repo-list.module.scss";
 import stylesSearchForm from "@layouts/blocks/search-form/search-form.module.scss";
+import ReposListStore from "@store/ReposListStore";
 import { Meta } from "@utils/meta";
 import { observer, useLocalStore } from "mobx-react-lite";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
-import ReposListStore from "../../../store/ReposListStore";
 import { ReposContext, useReposContext } from "../../App";
 
 function ReposSearchPage() {

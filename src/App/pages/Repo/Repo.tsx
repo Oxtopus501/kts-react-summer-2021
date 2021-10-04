@@ -1,11 +1,11 @@
 import React from "react";
 
 import StarIcon from "@components/StarIcon";
+import RepoItemStore from "@store/RepoItemStore/RepoItemStore";
 import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 
-import RepoItemStore from "../../../store/RepoItemStore/RepoItemStore";
 import styles from "./Repo.module.scss";
 
 const Repo: React.FC = () => {

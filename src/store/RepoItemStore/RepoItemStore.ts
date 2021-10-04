@@ -1,3 +1,11 @@
+import {
+  normalizeRepoItem,
+  RepoItemApi,
+  RepoItemModel,
+} from "@store/models/gitHub/repoItem";
+import ApiStore from "@store/RootStore/ApiStore";
+import { ApiResponse, HTTPMethod } from "@store/RootStore/ApiStore/types";
+import rootStore from "@store/RootStore/index";
 import { Meta } from "@utils/meta";
 import { ILocalStore } from "@utils/useLocalStore";
 import {
@@ -8,14 +16,6 @@ import {
   runInAction,
 } from "mobx";
 
-import {
-  normalizeRepoItem,
-  RepoItemApi,
-  RepoItemModel,
-} from "../models/gitHub/repoItem";
-import rootStore from "../RootStore";
-import ApiStore from "../RootStore/ApiStore";
-import { ApiResponse, HTTPMethod } from "../RootStore/ApiStore/types";
 import { IRepoItemStore } from "./types";
 
 const BASE_URL = "https://api.github.com";
