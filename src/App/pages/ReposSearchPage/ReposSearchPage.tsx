@@ -7,32 +7,30 @@ import SearchIcon from "@components/SearchIcon";
 import stylesRepoList from "@layouts/blocks/repo-list/repo-list.module.scss";
 import stylesSearchForm from "@layouts/blocks/search-form/search-form.module.scss";
 import ReposListStore from "@store/ReposListStore";
+import rootStore from "@store/RootStore/instance";
 import { Meta } from "@utils/meta";
 import { observer, useLocalStore } from "mobx-react-lite";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 
-import { ReposContext, useReposContext } from "../../App";
-
 function ReposSearchPage() {
   const reposListStore = useLocalStore(() => new ReposListStore());
 
-  const reposContext = useReposContext();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    reposContext.changeValue(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    rootStore.setInputValue(e.target.value);
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     reposListStore.getOrganizationReposList({
-      organizationName: reposContext.inputValue,
+      organizationName: rootStore.inputValue,
     });
   };
 
   React.useEffect(() => {
-    if (reposContext.inputValue !== "") {
+    if (rootStore.inputValue !== "") {
       reposListStore.getOrganizationReposList({
-        organizationName: reposContext.inputValue,
+        organizationName: rootStore.inputValue,
       });
     }
   }, []);
@@ -43,7 +41,7 @@ function ReposSearchPage() {
         <Input
           placeholder={"Введите название организации"}
           onChange={handleChange}
-          value={reposContext.inputValue}
+          value={rootStore.inputValue}
         />
         <Button
           children={<SearchIcon />}
