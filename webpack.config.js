@@ -46,6 +46,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(srcPath, "index.html"),
+      favicon: path.join(srcPath, "images/favicon.ico"),
     }),
     !isProd && new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: "[name]-[hash].css" }),
@@ -90,5 +91,6 @@ module.exports = {
     host: "127.0.0.1",
     port: 9000,
     hot: true,
+    historyApiFallback: true,
   },
 };

@@ -14,7 +14,7 @@
       "@utils/*": [
         "src/utils/*"
       ],
-      "@layots/*": [
+      "@layouts/*": [
         "src/layouts/*"
       ],
       "@store/*": [

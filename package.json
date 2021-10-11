@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "NODE_ENV=production npx webpack --node=production",
+    "build": "NODE_ENV=production npx webpack --mode=production",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{ts,tsx}'",

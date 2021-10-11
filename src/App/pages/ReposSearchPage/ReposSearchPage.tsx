@@ -9,9 +9,12 @@ import stylesSearchForm from "@layouts/blocks/search-form/search-form.module.scs
 import ReposListStore from "@store/ReposListStore";
 import rootStore from "@store/RootStore/instance";
 import { Meta } from "@utils/meta";
+import routes from "@utils/routesConfig";
 import { observer, useLocalStore } from "mobx-react-lite";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
+
+const repoLink = routes.reposDetails;
 
 function ReposSearchPage() {
   const reposListStore = useLocalStore(() => new ReposListStore());
@@ -53,7 +56,7 @@ function ReposSearchPage() {
         {reposListStore.list.map((repo) => {
           return (
             <Link
-              to={`/repos/${repo.id}`}
+              to={repoLink.create(repo.id)}
               style={{ textDecoration: "none", width: 357 }}
             >
               <RepoTile

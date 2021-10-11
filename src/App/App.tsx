@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 
 import rootStore from "@store/RootStore/instance";
+import routes from "@utils/routesConfig";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { RepoItemModel } from "src/store/models/gitHub";
 
@@ -13,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/repos" component={ReposSearchPage} />
-        <Route path="/repos/:id" component={Repo} />
+        <Route path={routes.reposDetails.mask} component={Repo} />
         <Redirect to="/repos" />
       </Switch>
     </BrowserRouter>

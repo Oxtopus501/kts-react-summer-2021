@@ -15,6 +15,7 @@ export default class RootStore {
       setInputValue: action,
     });
   }
+
   setInputValue(value: string): void {
     this.inputValue = value;
   }
