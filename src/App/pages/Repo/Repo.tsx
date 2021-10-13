@@ -17,6 +17,10 @@ const Repo: React.FC = () => {
 
   return (
     <div>
+      {
+        // eslint-disable-next-line no-console
+        console.log(repoItemStore.repo)
+      }
       {repoItemStore.repo ? (
         <div className={`${styles["repo"]}`}>
           <div
@@ -32,7 +36,7 @@ const Repo: React.FC = () => {
               {repoItemStore.repo.name}
             </h2>
             <p className={`${styles["repo__org-link"]}`}>
-              {repoItemStore.repo.owner.login}
+              Организация: {repoItemStore.repo.owner.login}
             </p>
             <div className={`${styles["repo__repo-info"]}`}>
               <div className={`${styles["repo__star-icon"]}`}>
@@ -42,7 +46,18 @@ const Repo: React.FC = () => {
                 {repoItemStore.repo.stargazersCount}
               </p>
               <p className={`${styles["repo__update-info"]}`}>
-                {repoItemStore.repo.updatedAt}
+                Обновлён &nbsp;
+                {
+                  //repoItemStore.repo.updatedAt
+                  new Intl.DateTimeFormat("ru-RU", {
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  }).format(repoItemStore.repo.updatedAt)
+                }
               </p>
             </div>
           </div>

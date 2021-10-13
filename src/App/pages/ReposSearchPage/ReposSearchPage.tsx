@@ -2,6 +2,7 @@ import React, { ReactType, useContext } from "react";
 
 import Button from "@components/Button";
 import Input from "@components/Input";
+import NoResults from "@components/NoResults";
 import RepoTile from "@components/RepoTile/RepoTile";
 import SearchIcon from "@components/SearchIcon";
 import stylesRepoList from "@layouts/blocks/repo-list/repo-list.module.scss";
@@ -64,12 +65,20 @@ function ReposSearchPage() {
                 title={repo.name}
                 organization={repo.owner.login}
                 starCounter={repo.stargazersCount}
-                updated={repo.updatedAt}
+                updated={new Intl.DateTimeFormat("ru-RU", {
+                  year: "numeric",
+                  month: "long",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                }).format(repo.updatedAt)}
                 avatar={repo.owner.avatarUrl}
               />
             </Link>
           );
         })}
+        {reposListStore.meta === Meta.error && <NoResults />}
       </div>
     </>
   );

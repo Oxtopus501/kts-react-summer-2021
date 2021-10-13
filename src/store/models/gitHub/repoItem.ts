@@ -19,14 +19,18 @@ export type RepoItemModel = {
   name: string;
   stargazersCount: number;
   owner: GitHubRepoOwnerModel;
-  updatedAt: string;
+  updatedAt: Date;
 };
 
-export const normalizeRepoItem = (from: RepoItemApi): RepoItemModel => ({
-  id: from.id,
-  url: from.url,
-  name: from.name,
-  stargazersCount: from.stargazers_count,
-  owner: normalizeGitHubRepoOwner(from.owner),
-  updatedAt: from.updated_at,
-});
+export const normalizeRepoItem = (from: RepoItemApi): RepoItemModel => {
+  // eslint-disable-next-line no-console
+  console.log(from.updated_at.toString().slice(0, -1));
+  return {
+    id: from.id,
+    url: from.url,
+    name: from.name,
+    stargazersCount: from.stargazers_count,
+    owner: normalizeGitHubRepoOwner(from.owner),
+    updatedAt: new Date(from.updated_at.toString().slice(0, -1)),
+  };
+};
