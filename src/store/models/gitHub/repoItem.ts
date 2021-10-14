@@ -23,8 +23,6 @@ export type RepoItemModel = {
 };
 
 export const normalizeRepoItem = (from: RepoItemApi): RepoItemModel => {
-  // eslint-disable-next-line no-console
-  console.log(from.updated_at.toString().slice(0, -1));
   return {
     id: from.id,
     url: from.url,
