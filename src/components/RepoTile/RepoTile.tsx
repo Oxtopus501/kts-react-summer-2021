@@ -9,7 +9,7 @@ export type RepoTileProps = {
   title: String;
   organization: String;
   starCounter: Number;
-  updated: String;
+  updated: string;
   avatar: String;
 };
 

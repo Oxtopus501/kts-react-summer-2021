@@ -1,23 +1,8 @@
-import { ApiResponse } from "../../shared/store/ApiStore/types";
+import { RepoItemApi } from "../models/gitHub";
+import { ApiResponse } from "../RootStore/ApiStore/types";
 
 export type GetOrganizationReposListParams = {
   organizationName: string;
-};
-
-export type GitHubRepoOwner = {
-  id: number;
-  url: string;
-  avatar_url: string;
-  login: string;
-};
-
-export type RepoItem = {
-  id: number;
-  url: string;
-  name: string;
-  stargazers_count: number;
-  owner: GitHubRepoOwner;
-  updated_at: string;
 };
 
 /** Интерфейс класса для работы с GitHub API
@@ -30,5 +15,5 @@ export type RepoItem = {
 export interface IGitHubStore {
   getOrganizationReposList(
     params: GetOrganizationReposListParams
-  ): Promise<ApiResponse<RepoItem[], any>>;
+  ): Promise<ApiResponse<RepoItemApi[], any>>;
 }
